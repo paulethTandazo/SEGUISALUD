@@ -1,0 +1,7 @@
+{
+  "name": "SEGUI-SALUD",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
