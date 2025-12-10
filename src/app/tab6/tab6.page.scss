@@ -1,0 +1,279 @@
+ion-content {
+  --background: #f8f9fa;
+}
+
+.header-title {
+  font-weight: 700;
+  color: #333;
+}
+
+.water-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .water-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+    
+    .icon-circle {
+      width: 40px;
+      height: 40px;
+      background: #e3f2fd;
+      color: #2196f3;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-right: 15px;
+    }
+
+    .text-info h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .text-info p {
+      margin: 2px 0 0 0;
+      font-size: 13px;
+      color: #666;
+    }
+  }
+
+  .bottle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .bottle-neck {
+    width: 40px;
+    height: 15px;
+    background: #e0e0e0;
+    border: 2px solid #ccc;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .bottle-body {
+    width: 100px;
+    height: 160px;
+    border: 3px solid #ccc;
+    border-radius: 0 0 20px 20px;
+    background: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+  }
+
+  .water-block {
+    flex: 1;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    transition: background 0.3s ease;
+    background: transparent;
+
+    &.filled {
+      background: #42a5f5;
+      box-shadow: inset 0 -2px 5px rgba(0,0,0,0.1);
+    }
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .water-hint {
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+  }
+}
+
+.wellness-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+
+  h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+  }
+}
+
+.mood-selector {
+  display: flex;
+  justify-content: space-between;
+  
+  ion-button {
+    --padding-start: 0;
+    --padding-end: 0;
+    height: 50px;
+    width: 50px;
+    
+    ion-icon {
+      font-size: 35px;
+      opacity: 0.3;
+      transition: 0.3s;
+    }
+    
+    &.selected ion-icon {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+}
+
+.mood-label {
+  color: #3880ff;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.custom-segment {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-weight: 700;
+  color: #333;
+  margin: 10px 0 10px 5px;
+}
+
+.input-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  text-align: center;
+
+  h4 {
+    margin: 10px 0 5px 0;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .desc {
+    margin: 0 0 20px 0;
+    font-size: 13px;
+    color: #888;
+  }
+}
+
+.icon-header {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  ion-icon {
+    font-size: 30px;
+  }
+
+  &.blue {
+    background: #e3edfb;
+    color: #3880ff;
+  }
+  &.red {
+    background: #fde8e8;
+    color: #eb445a;
+  }
+  &.orange {
+    background: #fff3e0;
+    color: #ff9800;
+  }
+}
+
+.custom-input {
+  --background: #f0f4f8;
+  border-radius: 12px;
+  --padding-start: 15px;
+  margin-bottom: 20px;
+  text-align: left;
+  
+  ion-input {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .unit {
+    font-size: 14px;
+    color: #888;
+    margin-right: 15px;
+  }
+
+  &.area {
+    --border-radius: 15px;
+  }
+}
+
+.pressure-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  
+  .half {
+    margin-bottom: 0;
+  }
+  
+  .slash {
+    font-size: 24px;
+    color: #ccc;
+    font-weight: 300;
+  }
+}
+
+.btn-save {
+  --border-radius: 12px;
+  font-weight: 600;
+  height: 50px;
+
+  &.blue {
+    --background: #3880ff;
+    --box-shadow: 0 4px 10px rgba(56, 128, 255, 0.3);
+  }
+  &.red {
+    --background: #eb445a;
+    --box-shadow: 0 4px 10px rgba(235, 68, 90, 0.3);
+  }
+  &.orange {
+    --background: #ff9800;
+    --box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
+  }
+}
+
+.animate-fade {
+  animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,121 @@
+ion-content {
+  --background: #f8f9fa;
+}
+
+.header-title {
+  font-weight: 700;
+  color: #333;
+}
+
+// Tarjeta de Agregar (Formulario)
+.add-card {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+
+  h3 {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #444;
+    margin-bottom: 15px;
+  }
+}
+
+.custom-input {
+  --background: #f0f4f8;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  --padding-start: 10px;
+}
+
+.btn-add {
+  margin-top: 15px;
+  --border-radius: 12px;
+  --box-shadow: none;
+  font-weight: 600;
+}
+
+.section-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-left: 5px;
+  margin-bottom: 15px;
+}
+
+// Tarjeta de Medicamento Individual
+.med-card {
+  background: white;
+  border-radius: 16px;
+  padding: 15px 15px 15px 20px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+
+  .med-info {
+    flex: 1; // Ocupa todo el espacio izquierdo
+    
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+
+      h2 {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 700;
+        color: #222;
+      }
+
+      .badge {
+        font-size: 12px;
+        background: #e3edfb;
+        color: #3880ff;
+        padding: 4px 10px;
+        border-radius: 10px;
+        font-weight: 600;
+
+        &.low-stock {
+          background: #ffebee;
+          color: #ef5350; // Rojo si quedan pocas
+        }
+      }
+    }
+
+    .custom-progress {
+      height: 8px;
+      border-radius: 4px;
+      margin-bottom: 5px;
+    }
+
+    .stats {
+      margin: 0;
+      font-size: 11px;
+      color: #999;
+    }
+  }
+
+  .med-action {
+    margin-left: 10px;
+    border-left: 1px solid #eee;
+    padding-left: 5px;
+
+    .btn-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #3880ff;
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  color: #aaa;
+  margin-top: 40px;
+}

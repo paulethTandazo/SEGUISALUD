@@ -1,0 +1,74 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="header-title">Mi Botiquín</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-light ion-padding">
+
+  <!-- SECCIÓN: AGREGAR NUEVO MEDICAMENTO -->
+  <div class="add-card">
+    <h3>Nuevo Medicamento</h3>
+    
+    <ion-item lines="none" class="custom-input">
+      <ion-icon slot="start" name="medkit-outline" color="primary"></ion-icon>
+      <ion-input [(ngModel)]="nuevoNombre" placeholder="Nombre (ej. Aspirina)"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="custom-input">
+      <ion-icon slot="start" name="apps-outline" color="primary"></ion-icon>
+      <ion-input type="number" [(ngModel)]="nuevaCantidad" placeholder="Cantidad Total (ej. 30)"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" class="btn-add" (click)="agregarMedicamento()">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Guardar en Inventario
+    </ion-button>
+  </div>
+
+  <h3 class="section-label">Medicamentos Disponibles</h3>
+
+  <!-- LISTA DE INVENTARIO -->
+  <div class="inventory-list">
+    
+    <div class="med-card" *ngFor="let med of medicamentos">
+      
+      <div class="med-info">
+        <div class="top-row">
+          <h2>{{ med.nombre }}</h2>
+          <!-- Badge que avisa si queda poco -->
+          <span class="badge" [class.low-stock]="med.cantidadActual <= 3">
+            {{ med.cantidadActual }} restantes
+          </span>
+        </div>
+
+        <!-- Barra de Progreso Visual -->
+        <ion-progress-bar 
+          [value]="med.progreso" 
+          [color]="getColorBarra(med.progreso)"
+          class="custom-progress">
+        </ion-progress-bar>
+        
+        <p class="stats">De {{ med.cantidadInicial }} unidades iniciales</p>
+      </div>
+
+      <!-- Botón para registrar toma MANUALMENTE desde el inventario -->
+      <div class="med-action">
+        <ion-button fill="clear" (click)="tomarDosisManual(med)" [disabled]="med.cantidadActual === 0">
+          <div class="btn-column">
+            <ion-icon name="remove-circle-outline" style="font-size: 28px;"></ion-icon>
+            <span style="font-size: 10px;">Restar 1</span>
+          </div>
+        </ion-button>
+      </div>
+
+    </div>
+
+    <!-- Mensaje vacío -->
+    <div *ngIf="medicamentos.length === 0" class="empty-state">
+      <p>Tu botiquín está vacío.</p>
+    </div>
+
+  </div>
+
+</ion-content>

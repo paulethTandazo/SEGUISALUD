@@ -1,0 +1,97 @@
+.login-wrapper {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; // Espacio entre elementos
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 10px;
+
+  .input-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-left: 5px;
+  }
+}
+.main-title {
+  /* ✅ Aquí aplicamos la fuente */
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700; /* <weight> lo cambiamos por 700 (Negrita) o 400 (Normal) */
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+
+  /* Tus otros estilos que ya teníamos */
+  color: #00618e;
+  font-size: 28px;
+  letter-spacing: 1.5px;
+  margin-top: 0;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.logo-img {
+  display: block;         
+  margin: 0 auto 30px auto; 
+  border-radius: 10px;   
+}
+.rounded-input {
+  --background: #ffffff;
+  --border-radius: 25px; // Borde redondeado
+  --padding-start: 10px;
+  
+  border: 1px solid #e0e0e0; // El borde gris suave
+  box-shadow: none;
+}
+
+// Botón Negro Principal
+.login-btn {
+  --background: #00618e; // Negro puro
+  --border-radius: 50px; // Muy redondeado
+  --color: white;
+  height: 55px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-transform: none; // Evita que sea todo mayúsculas
+  margin-top: 10px;
+}
+
+// El separador "Or" con líneas
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+
+  .line {
+    height: 1px;
+    background: #e0e0e0;
+    flex: 1; // Ocupa todo el espacio disponible
+  }
+  
+  span {
+    padding: 0 10px; // Espacio alrededor del texto "Or"
+  }
+}
+
+// Botones Sociales (Google / Apple)
+.social-btn {
+  --border-radius: 50px;
+  --border-color: #e0e0e0; // Borde gris suave
+  --color: #00618e; // Texto negro
+  --border-width: 1px;
+  height: 55px;
+  font-weight: 500;
+  text-transform: none;
+  margin-bottom: 10px;
+
+  ion-icon {
+    font-size: 1.5rem;
+  }
+}

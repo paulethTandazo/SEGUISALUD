@@ -1,0 +1,49 @@
+<ion-content [fullscreen]="true" class="ion-padding ion-text-center">
+
+  <div class="login-wrapper">
+    
+    <img src="https://i.postimg.cc/rFBg1f82/Logo-Principal.png" class="logo-img" alt="Logo SEGUISALUD" width="100" height="100">
+    <h1 class="main-title">SEGUISALUD</h1>
+    <div class="input-group">
+      <ion-text color="medium" class="input-label">Correo Eléctronico</ion-text>
+      <ion-item lines="none" class="rounded-input">
+        <ion-icon slot="start" name="mail-outline" color="medium"></ion-icon>
+        <ion-input type="email" placeholder="Ingrese su correo electrónico"></ion-input>
+      </ion-item>
+    </div>
+    <br>
+    <br>
+
+    <div class="input-group">
+      <ion-text color="medium" class="input-label">Contraseña</ion-text>
+      <ion-item lines="none" class="rounded-input">
+        <ion-icon slot="start" name="lock-closed-outline" color="medium"></ion-icon>
+        <ion-input type="password" placeholder="Ingrese su contraseña"></ion-input>
+        <ion-icon slot="end" name="eye-outline" class="eye-icon"></ion-icon>
+      </ion-item>
+    </div>
+
+    <br>
+
+    <ion-button expand="block" class="login-btn" (click)="ingresar()">
+      Login
+    </ion-button>
+
+    <div class="separator">
+      <div class="line"></div>
+      <span>Or</span>
+      <div class="line"></div>
+    </div>
+
+    <ion-button expand="block" fill="outline" class="social-btn">
+      <ion-icon slot="start" name="logo-google"></ion-icon>
+      Continue with Google
+    </ion-button>
+
+    <ion-button expand="block" fill="outline" class="social-btn">
+      <ion-icon slot="start" name="logo-apple"></ion-icon>
+      Continue with Apple
+    </ion-button>
+
+  </div>
+</ion-content>

@@ -1,0 +1,106 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="header-title">Farmacias GPS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-light ion-padding">
+
+  <div class="location-box ion-text-center">
+    <p class="loc-text">Encuentra medicamentos cerca de ti</p>
+    
+    <ion-button expand="block" class="btn-location" (click)="compartirUbicacion()" [disabled]="cargando">
+      <ion-icon slot="start" name="navigate-circle-outline"></ion-icon>
+      {{ cargando ? 'Buscando satélite...' : 'Buscar cerca de Mí' }}
+    </ion-button>
+
+    <div *ngIf="cargando" class="ion-margin-top">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </div>
+  </div>
+
+  <h3 class="section-title" *ngIf="farmacias.length > 0">
+    Resultados ({{ farmacias.length }})
+  </h3>
+
+  <div class="pharmacy-list">
+    
+    <div class="pharmacy-card" *ngFor="let f of farmacias">
+      <div class="card-img">
+        <img [src]="f.imagen" alt="logo farmacia">
+      </div>
+
+      <div class="card-info">
+        <h2>{{ f.nombre }}</h2>
+        <p class="address">{{ f.direccion }}</p>
+        
+        <div class="rating-container">
+          <ion-icon name="star" color="warning" *ngFor="let s of getEstrellas(f.rate)"></ion-icon>
+          <span class="rate-number">{{ f.rate }}</span>
+        </div>
+      </div>
+
+      <div class="card-action">
+        <!-- BOTÓN VER AHORA ABRE EL MODAL -->
+        <ion-button size="small" shape="round" color="primary" (click)="verDetalle(f)">
+          Ver
+        </ion-button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL DE DETALLE (VENTANA EMERGENTE)       -->
+  <!-- ========================================== -->
+  <!-- MODIFICACIÓN: Se eliminaron los breakpoints para evitar el arrastre -->
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="cerrarModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Detalle de Farmacia</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content class="ion-padding" *ngIf="farmaciaSeleccionada">
+        
+        <div class="modal-content ion-text-center">
+          <img [src]="farmaciaSeleccionada.imagen" style="width: 80px; margin-bottom: 10px;">
+          
+          <h2>{{ farmaciaSeleccionada.nombre }}</h2>
+          <p style="color: #666; margin-bottom: 20px;">{{ farmaciaSeleccionada.direccion }}</p>
+
+          <ion-list lines="none" class="detail-list">
+            <ion-item>
+              <ion-icon name="time-outline" slot="start" color="medium"></ion-icon>
+              <ion-label>
+                <h3>Horario</h3>
+                <p>8am a 9pm (Horarios varían en feriados)</p>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="call-outline" slot="start" color="medium"></ion-icon>
+              <ion-label>
+                <h3>Teléfono</h3>
+                <p>188652165</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+
+          <br>
+
+          <ion-button expand="block" color="success" (click)="comoLlegar()">
+            <ion-icon name="map-outline" slot="start"></ion-icon>
+            Cómo llegar (Google Maps)
+          </ion-button>
+
+        </div>
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

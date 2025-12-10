@@ -1,17 +1,103 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar style="--background: #f8f9fa;">
+    <ion-title style="color: #333; font-weight: 700;">Mi Agenda</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div class="flashcard-container" [style.background]="colorActual">
+    
+    <div class="card-header">
+      <h3>Nueva Dosis</h3>
+      <ion-button fill="clear" class="btn-color" (click)="cambiarColor()">
+        <ion-icon name="color-palette-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="input-group">
+      <ion-label>
+        <ion-icon name="medkit-outline" style="vertical-align: middle;"></ion-icon>
+        Medicamento del Botiquín
+      </ion-label>
+      
+      <ion-select 
+        [(ngModel)]="medicamentoVinculado" 
+        (ionChange)="alSeleccionarMedicamento()" 
+        interface="popover" 
+        placeholder="Selecciona uno...">
+        
+        <ion-select-option *ngFor="let med of listaMedicamentos" [value]="med.nombre">
+          {{ med.nombre }} ({{ med.cantidadActual }} rest.)
+        </ion-select-option>
+
+      </ion-select>
+    </div>
+
+    <div class="input-group">
+      <ion-label>Descripción</ion-label>
+      <ion-textarea 
+        [(ngModel)]="nuevoRecordatorio" 
+        rows="2" 
+        placeholder="Ej. Recordatorio para dosis de...">
+      </ion-textarea>
+    </div>
+
+    <div class="mini-calendar">
+      <div class="calendar-label">
+        <ion-icon name="time-outline"></ion-icon>
+        <span>Fecha y Hora</span>
+      </div>
+      <ion-datetime 
+        presentation="date-time" 
+        size="cover" 
+        [preferWheel]="true"
+        [(ngModel)]="fechaSeleccionada"
+        (ionChange)="cambioFecha($event)">
+      </ion-datetime>
+    </div>
+
+    <ion-button expand="block" (click)="agregarRecordatorio()" class="btn-save-card">
+      <ion-icon name="notifications-outline" slot="start"></ion-icon>
+      Programar
+    </ion-button>
+
+  </div>
+
+  <div class="list-wrapper">
+    <ion-list-header style="padding-left: 0; margin-bottom: 10px;">
+      <ion-label style="font-size: 18px; font-weight: 700; color: #333;">Próximas Dosis</ion-label>
+    </ion-list-header>
+
+    <ion-list lines="none" style="background: transparent;">
+      
+      <ion-item *ngFor="let item of listaRecordatorios" class="task-item">
+        <div class="task-card" [style.background]="item.color">
+          
+          <div class="icon-box">
+            <ion-icon name="alarm-outline"></ion-icon>
+          </div>
+          
+          <div class="task-info">
+            <h2>{{ item.texto }}</h2>
+            <p>{{ item.fecha | date:'short' }}</p>
+            <ion-badge color="light" *ngIf="item.medicina" style="margin-top: 5px; opacity: 0.8">
+              {{ item.medicina }}
+            </ion-badge>
+          </div>
+
+          <ion-button fill="clear" (click)="completarTarea(item)" class="btn-check">
+            <ion-icon name="checkmark-circle-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+
+        </div>
+      </ion-item>
+      
+      <div *ngIf="listaRecordatorios.length === 0" class="ion-text-center ion-padding" style="color: #999;">
+        <p>No tienes dosis pendientes.</p>
+      </div>
+
+    </ion-list>
+  </div>
+
 </ion-content>

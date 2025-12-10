@@ -1,0 +1,153 @@
+// Fondo general
+ion-content {
+  --background: #f8f9fa;
+}
+
+// Cabecera Personalizada
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+
+  .greeting {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .user-name {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
+    color: #333;
+    letter-spacing: -0.5px;
+  }
+
+  .notif-btn {
+    position: relative;
+    color: #333;
+    
+    .badge-dot {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      width: 8px;
+      height: 8px;
+      background: #eb445a;
+      border-radius: 50%;
+      border: 1px solid white;
+    }
+  }
+}
+
+// Tarjeta de Estado (Banner Azul)
+.status-card {
+  background: linear-gradient(135deg, #3880ff 0%, #3dc2ff 100%);
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 20px rgba(56, 128, 255, 0.3);
+
+  .status-content {
+    flex: 1;
+    h3 { margin: 0 0 5px 0; font-weight: 700; font-size: 18px; }
+    p { margin: 0 0 15px 0; font-size: 13px; opacity: 0.9; line-height: 1.4; }
+    
+    ion-button {
+      --color: #3880ff;
+      font-weight: 600;
+      height: 30px;
+      font-size: 12px;
+      --border-radius: 8px;
+    }
+  }
+
+  .status-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+  }
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  padding-left: 5px;
+}
+
+// Tarjetas de Acción (Botones Cuadrados)
+.action-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 5px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  transition: transform 0.2s;
+
+  &:active {
+    transform: scale(0.96); // Efecto de click
+  }
+
+  // Caja del Icono con colores
+  .icon-box {
+    width: 55px;
+    height: 55px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+
+    ion-icon { font-size: 26px; }
+
+    &.blue { background: #e3edfb; color: #3880ff; }
+    &.green { background: #e0f2f1; color: #009688; }
+    &.orange { background: #fff3e0; color: #ff9800; }
+    &.red { background: #fce4ec; color: #ec407a; }
+  }
+
+  .card-title {
+    font-weight: 700;
+    color: #333;
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+
+  .card-desc {
+    font-size: 11px;
+    color: #1a0101;
+  }
+}
+
+// Animaciones de entrada
+.animate-up {
+  animation: slideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,174 @@
+ion-content {
+  --background: #f8f9fa;
+}
+
+.flashcard-container {
+  border-radius: 25px;
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  margin-bottom: 30px;
+  transition: background 0.3s ease;
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+
+    h3 {
+      margin: 0;
+      font-weight: 800;
+      color: #333;
+      opacity: 0.8;
+    }
+
+    .btn-color {
+      --color: #333;
+      background: rgba(255,255,255,0.4);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      --padding-start: 0;
+      --padding-end: 0;
+    }
+  }
+
+  .input-group {
+    background: rgba(255,255,255,0.6);
+    border-radius: 15px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+
+    ion-label {
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    ion-select, ion-textarea {
+      --padding-start: 0;
+      font-weight: 600;
+      color: #222;
+    }
+  }
+
+  .mini-calendar {
+    background: rgba(255,255,255,0.8);
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+
+    .calendar-label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding-left: 10px;
+      margin-bottom: 5px;
+      color: #555;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    ion-datetime {
+      --background: transparent;
+      border-radius: 15px;
+      margin: 0 auto;
+    }
+  }
+
+  .btn-save-card {
+    --background: #333;
+    --color: white;
+    --border-radius: 15px;
+    font-weight: 700;
+    height: 50px;
+    --box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+}
+
+.list-wrapper {
+  padding-bottom: 40px;
+}
+
+.task-item {
+  --background: transparent;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 15px;
+
+  .task-card {
+    width: 100%;
+    padding: 15px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+
+    .icon-box {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+
+    .task-info {
+      flex: 1;
+      h2 {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0 0 4px 0;
+        color: #222;
+      }
+      p {
+        font-size: 13px;
+        color: #444;
+        margin: 0;
+        font-weight: 500;
+      }
+    }
+
+    .btn-check {
+      --color: #222;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      --padding-start: 0;
+      --padding-end: 0;
+      
+      ion-icon {
+        font-size: 24px;
+        color: #198754;
+      }
+    }
+  }
+}
+
+::ng-deep .alarm-alert {
+  --ion-text-color: #333;
+  
+  .alert-wrapper {
+    border: 2px solid #eb445a;
+    box-shadow: 0 0 20px rgba(235, 68, 90, 0.5);
+  }
+
+  .alert-head {
+    h2 { 
+      color: #eb445a; 
+      font-weight: 900; 
+      text-transform: uppercase;
+    }
+  }
+}

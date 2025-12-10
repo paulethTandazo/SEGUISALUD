@@ -1,0 +1,133 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="header-title">Mi Salud Hoy</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-light ion-padding">
+
+  <div class="wellness-card ion-text-center">
+    <h3>¿Cómo te sientes ahora?</h3>
+    <div class="mood-selector">
+      <ion-button fill="clear" (click)="setBienestar(1)" [class.selected]="nivelBienestar === 1">
+        <ion-icon name="sad-outline" color="danger"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="setBienestar(2)" [class.selected]="nivelBienestar === 2">
+        <ion-icon name="alert-circle-outline" color="warning"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="setBienestar(3)" [class.selected]="nivelBienestar === 3">
+        <ion-icon name="remove-circle-outline" color="medium"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="setBienestar(4)" [class.selected]="nivelBienestar === 4">
+        <ion-icon name="happy-outline" color="success"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="setBienestar(5)" [class.selected]="nivelBienestar === 5">
+        <ion-icon name="star-outline" color="primary"></ion-icon>
+      </ion-button>
+    </div>
+    <p class="mood-label" *ngIf="nivelBienestar >= 4">¡Me siento bien!</p>
+    <p class="mood-label" *ngIf="nivelBienestar <= 2">No me siento muy bien</p>
+  </div>
+
+  <div class="water-card">
+    <div class="water-header">
+      <div class="icon-circle">
+        <ion-icon name="water-outline"></ion-icon>
+      </div>
+      <div class="text-info">
+        <h4>Hidratación Diaria</h4>
+        <p>{{ litrosConsumidos }}L / 2.0L Meta</p>
+      </div>
+    </div>
+
+    <div class="bottle-container">
+      <div class="bottle-neck"></div>
+      <div class="bottle-body">
+        <div 
+          *ngFor="let bloque of bloquesAgua" 
+          class="water-block"
+          [class.filled]="nivelAguaActual >= bloque"
+          (click)="tomarAgua(bloque)">
+        </div>
+      </div>
+    </div>
+    <p class="water-hint">Toca para llenar</p>
+  </div>
+
+  <h3 class="section-title">Registro Clínico</h3>
+  
+  <ion-segment [(ngModel)]="tipoRegistro" mode="ios" class="custom-segment">
+    <ion-segment-button value="diabetes">
+      <ion-label>Diabetes</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="presion">
+      <ion-label>Presión</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="general">
+      <ion-label>General</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="input-card">
+    
+    <div *ngIf="tipoRegistro === 'diabetes'" class="animate-fade">
+      <div class="icon-header blue">
+        <ion-icon name="water-outline"></ion-icon>
+      </div>
+      <h4>Registro de Glucosa</h4>
+      <p class="desc">Ingresa tu nivel actual en mg/dL</p>
+
+      <ion-item lines="none" class="custom-input">
+        <ion-input type="number" [(ngModel)]="glucosa" placeholder="Ej. 110"></ion-input>
+        <span slot="end" class="unit">mg/dL</span>
+      </ion-item>
+
+      <ion-button expand="block" class="btn-save blue" (click)="guardar('diabetes')">
+        <ion-icon slot="start" name="save-outline"></ion-icon>
+        Guardar
+      </ion-button>
+    </div>
+
+    <div *ngIf="tipoRegistro === 'presion'" class="animate-fade">
+      <div class="icon-header red">
+        <ion-icon name="pulse-outline"></ion-icon>
+      </div>
+      <h4>Presión Arterial</h4>
+      <p class="desc">Sistólica (Alta) / Diastólica (Baja)</p>
+
+      <div class="pressure-row">
+        <ion-item lines="none" class="custom-input half">
+          <ion-input type="number" [(ngModel)]="presionSistolica" placeholder="120"></ion-input>
+        </ion-item>
+        <span class="slash">/</span>
+        <ion-item lines="none" class="custom-input half">
+          <ion-input type="number" [(ngModel)]="presionDiastolica" placeholder="80"></ion-input>
+        </ion-item>
+      </div>
+
+      <ion-button expand="block" class="btn-save red" (click)="guardar('presion')">
+        <ion-icon slot="start" name="save-outline"></ion-icon>
+        Guardar
+      </ion-button>
+    </div>
+
+    <div *ngIf="tipoRegistro === 'general'" class="animate-fade">
+      <div class="icon-header orange">
+        <ion-icon name="document-text-outline"></ion-icon>
+      </div>
+      <h4>Notas Generales</h4>
+      <p class="desc">Síntomas, comidas o actividad física</p>
+
+      <ion-item lines="none" class="custom-input area">
+        <ion-textarea rows="4" [(ngModel)]="notas" placeholder="Escribe aquí cómo te sientes..."></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" class="btn-save orange" (click)="guardar('general')">
+        <ion-icon slot="start" name="save-outline"></ion-icon>
+        Guardar
+      </ion-button>
+    </div>
+
+  </div>
+
+</ion-content>

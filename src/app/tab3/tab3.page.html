@@ -1,17 +1,119 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="bg-light ion-padding">
+  
+  <!-- CABECERA DEL PERFIL -->
+  <div class="profile-header ion-text-center ion-margin-top">
+    
+    <!-- NUEVO: AVATAR DE USUARIO -->
+    <div class="avatar-wrapper">
+      <img src="//img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg" alt="Avatar">
+      <div class="edit-badge">
+        <ion-icon name="camera-outline"></ion-icon>
+      </div>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <h1>Roberto Gómez</h1>
+    <p class="user-id">ID: 123456789</p>
+    <div class="badge-container">
+      <span class="status-badge">Paciente Activo</span>
+    </div>
+  </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <h3 class="section-title">Información Personal</h3>
+
+  <!-- TARJETA PRINCIPAL DE DATOS -->
+  <div class="custom-card">
+    <div class="info-row">
+      <div class="icon-box">
+        <ion-icon name="mail-outline"></ion-icon>
+      </div>
+      <div class="info-text">
+        <span class="label">Email</span>
+        <span class="value">roberto@email.com</span>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="icon-box">
+        <ion-icon name="call-outline"></ion-icon>
+      </div>
+      <div class="info-text">
+        <span class="label">Teléfono</span>
+        <span class="value">+593 99 123 4567</span>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="icon-box">
+        <ion-icon name="location-outline"></ion-icon>
+      </div>
+      <div class="info-text">
+        <span class="label">Ciudad</span>
+        <span class="value">Guayaquil</span>
+      </div>
+    </div>
+
+    <!-- FILA DE ESTADÍSTICAS -->
+    <div class="stats-container">
+      <div class="stat-box blue">
+        <span class="stat-label">Sangre</span>
+        <span class="stat-value">O+</span>
+      </div>
+      <div class="stat-box red">
+        <span class="stat-label">Condición</span>
+        <span class="stat-value">Diabetes T1</span>
+      </div>
+      <div class="stat-box purple">
+        <span class="stat-label">Póliza</span>
+        <span class="stat-value">CA-311</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="section-title">Cuenta y Reportes</h3>
+
+  <!-- MENÚ DE OPCIONES -->
+  <div class="custom-card no-padding">
+    <ion-item lines="full" detail="true" class="menu-item">
+      <div class="icon-box slot-start" slot="start" style="background: #e3edfb; color: #3880ff;">
+        <ion-icon name="person-outline"></ion-icon>
+      </div>
+      <ion-label>
+        <h2>Editar Perfil</h2>
+        <p>Actualiza tus datos personales</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="full" detail="true" class="menu-item">
+      <div class="icon-box slot-start" slot="start" style="background: #fff4e0; color: #ffab00;">
+        <ion-icon name="card-outline"></ion-icon>
+      </div>
+      <ion-label>
+        <h2>Membresía</h2>
+        <p>Gestionar pagos y plan</p>
+      </ion-label>
+    </ion-item>
+
+    <!-- BOTÓN DE REPORTE -->
+    <ion-item lines="none" detail="true" class="menu-item" (click)="descargarReporte()" button>
+      <div class="icon-box slot-start" slot="start" style="background: #e0f2f1; color: #009688;">
+        <ion-icon name="download-outline"></ion-icon>
+      </div>
+      <ion-label>
+        <h2>Descargar Historial</h2>
+        <p>Reporte PDF de la semana</p>
+      </ion-label>
+    </ion-item>
+  </div>
+
+  <!-- BOTÓN CERRAR SESIÓN -->
+  <div class="custom-card logout-card ion-activatable ripple-parent">
+    <div class="red-icon">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </div>
+    <span class="logout-text">Cerrar Sesión</span>
+    <ion-ripple-effect></ion-ripple-effect>
+  </div>
+
+  <div class="spacer-bottom"></div>
+
 </ion-content>

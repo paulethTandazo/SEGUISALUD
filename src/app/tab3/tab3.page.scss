@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap');
+
+ion-content {
+  --background: #f8f9fa;
+  font-family: 'Open Sans', sans-serif;
+}
+
+// 1. Cabecera del Perfil
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+  margin-top: 10px;
+
+  // ESTILOS NUEVOS PARA EL AVATAR
+  .avatar-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #fff;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+
+    .edit-badge {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: var(--ion-color-primary);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #fff;
+      font-size: 18px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+  }
+
+  h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--ion-text-color);
+  }
+
+  .user-id {
+    margin: 5px 0 8px 0;
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+  }
+
+  .status-badge {
+    background: rgba(var(--ion-color-success-rgb), 0.1);
+    color: var(--ion-color-success);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+}
+
+// 2. Tarjeta de Detalles
+.custom-card {
+  background: var(--ion-card-background, #fff);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 15px;
+
+  &.no-padding {
+    padding: 10px 0;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    
+    .icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #f4f5f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ion-color-medium);
+      margin-right: 15px;
+      
+      ion-icon { font-size: 20px; }
+    }
+
+    .info-text {
+      display: flex;
+      flex-direction: column;
+      
+      .label {
+        font-size: 0.75rem;
+        color: var(--ion-color-medium);
+      }
+      .value {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--ion-text-color);
+      }
+    }
+  }
+
+  .stats-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+      padding: 8px 12px;
+      border-radius: 10px;
+      min-width: 80px;
+      flex: 1;
+      
+      .stat-label {
+        font-size: 0.7rem;
+        opacity: 0.8;
+        margin-bottom: 2px;
+      }
+      .stat-value {
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+
+      &.blue { background: rgba(var(--ion-color-primary-rgb), 0.1); color: var(--ion-color-primary); }
+      &.red { background: rgba(var(--ion-color-danger-rgb), 0.1); color: var(--ion-color-danger); }
+      &.purple { background: rgba(156, 39, 176, 0.1); color: #9c27b0; }
+    }
+  }
+}
+
+// 3. Botones de Acción
+.section-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  margin-left: 5px;
+  color: #333;
+}
+
+.menu-item {
+  --background: transparent;
+  --padding-start: 16px;
+  margin-bottom: 5px;
+  
+  .icon-box {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-right: 15px;
+    ion-icon { font-size: 20px; }
+  }
+  
+  h2 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+  p { font-size: 0.75rem; color: var(--ion-color-medium); }
+}
+
+.logout-card {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  border: 1px solid rgba(var(--ion-color-danger-rgb), 0.2);
+  
+  .red-icon {
+    width: 40px; height: 40px; 
+    background: rgba(var(--ion-color-danger-rgb), 0.1); 
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-right: 15px;
+    ion-icon { color: var(--ion-color-danger); font-size: 20px; }
+  }
+
+  .logout-text {
+    font-weight: 700; color: var(--ion-color-danger); font-size: 0.95rem;
+  }
+}
+
+.spacer-bottom { height: 40px; }
