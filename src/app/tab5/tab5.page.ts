@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { DataService, Medicamento } from '../services/data'; // Importamos el servicio
+import { IonicModule, AlertController } from '@ionic/angular'; // 1. Importamos AlertController
+import { DataService, Medicamento } from '../services/data';
 
 @Component({
   selector: 'app-tab5',
@@ -15,18 +15,21 @@ export class Tab5Page implements OnInit {
 
   nuevoNombre: string = '';
   nuevaCantidad: number | null = null;
-  medicamentos: Medicamento[] = []; // Ahora usamos la interfaz
+  medicamentos: Medicamento[] = [];
 
-  constructor(private dataService: DataService) {}
+  // 2. Inyectamos AlertController en el constructor
+  constructor(
+    private dataService: DataService,
+    private alertCtrl: AlertController 
+  ) {}
 
   ngOnInit() {
-    // Nos suscribimos a los datos globales
     this.dataService.medicamentos$.subscribe(datos => {
       this.medicamentos = datos;
     });
   }
 
-  agregarMedicamento() {
+  async agregarMedicamento() {
     if (this.nuevoNombre.length === 0 || !this.nuevaCantidad) {
       return; 
     }
@@ -38,14 +41,15 @@ export class Tab5Page implements OnInit {
       progreso: 1.0
     };
 
-    // Guardamos en el servicio global
     this.dataService.agregarMedicamento(nuevo);
+
+    // 3. Mostrar el Pop-up de éxito
+    await this.mostrarAlertaExito(this.nuevoNombre);
 
     this.nuevoNombre = '';
     this.nuevaCantidad = null;
   }
 
-  // Esta función es solo para probar el botón "-" manual en el inventario
   tomarDosisManual(med: Medicamento) {
     this.dataService.descontarDosis(med.nombre);
   }
@@ -54,5 +58,18 @@ export class Tab5Page implements OnInit {
     if (progreso > 0.5) return 'success';
     if (progreso > 0.2) return 'warning';
     return 'danger';
+  }
+
+  // --- NUEVA FUNCIÓN PARA LA ALERTA ---
+  async mostrarAlertaExito(nombreMedicamento: string) {
+    const alert = await this.alertCtrl.create({
+      header: '¡Guardado!',
+      subHeader: 'Inventario Actualizado',
+      message: `Se ha añadido "${nombreMedicamento}" a tu botiquín correctamente.`,
+      buttons: ['OK'],
+      cssClass: 'custom-alert' // Mantiene el estilo bonito que usamos en otros tabs
+    });
+
+    await alert.present();
   }
 }
