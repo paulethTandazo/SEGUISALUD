@@ -2,6 +2,7 @@ import {
   DataService
 } from "./chunk-TMJ67NVR.js";
 import {
+  AlertController,
   IonButton,
   IonContent,
   IonHeader,
@@ -72,7 +73,9 @@ import "./chunk-CEAAMTO4.js";
 import "./chunk-GZ5BDCOT.js";
 import "./chunk-HUY7ESWV.js";
 import "./chunk-GXFEW35R.js";
-import "./chunk-UL2P3LPA.js";
+import {
+  __async
+} from "./chunk-UL2P3LPA.js";
 
 // src/app/tab5/tab5.page.ts
 function Tab5Page_div_20_Template(rf, ctx) {
@@ -125,8 +128,10 @@ function Tab5Page_div_21_Template(rf, ctx) {
   }
 }
 var _Tab5Page = class _Tab5Page {
-  constructor(dataService) {
+  // 2. Inyectamos AlertController en el constructor
+  constructor(dataService, alertCtrl) {
     this.dataService = dataService;
+    this.alertCtrl = alertCtrl;
     this.nuevoNombre = "";
     this.nuevaCantidad = null;
     this.medicamentos = [];
@@ -137,20 +142,22 @@ var _Tab5Page = class _Tab5Page {
     });
   }
   agregarMedicamento() {
-    if (this.nuevoNombre.length === 0 || !this.nuevaCantidad) {
-      return;
-    }
-    const nuevo = {
-      nombre: this.nuevoNombre,
-      cantidadInicial: this.nuevaCantidad,
-      cantidadActual: this.nuevaCantidad,
-      progreso: 1
-    };
-    this.dataService.agregarMedicamento(nuevo);
-    this.nuevoNombre = "";
-    this.nuevaCantidad = null;
+    return __async(this, null, function* () {
+      if (this.nuevoNombre.length === 0 || !this.nuevaCantidad) {
+        return;
+      }
+      const nuevo = {
+        nombre: this.nuevoNombre,
+        cantidadInicial: this.nuevaCantidad,
+        cantidadActual: this.nuevaCantidad,
+        progreso: 1
+      };
+      this.dataService.agregarMedicamento(nuevo);
+      yield this.mostrarAlertaExito(this.nuevoNombre);
+      this.nuevoNombre = "";
+      this.nuevaCantidad = null;
+    });
   }
-  // Esta función es solo para probar el botón "-" manual en el inventario
   tomarDosisManual(med) {
     this.dataService.descontarDosis(med.nombre);
   }
@@ -161,9 +168,23 @@ var _Tab5Page = class _Tab5Page {
       return "warning";
     return "danger";
   }
+  // --- NUEVA FUNCIÓN PARA LA ALERTA ---
+  mostrarAlertaExito(nombreMedicamento) {
+    return __async(this, null, function* () {
+      const alert = yield this.alertCtrl.create({
+        header: "\xA1Guardado!",
+        subHeader: "Inventario Actualizado",
+        message: `Se ha a\xF1adido "${nombreMedicamento}" a tu botiqu\xEDn correctamente.`,
+        buttons: ["OK"],
+        cssClass: "custom-alert"
+        // Mantiene el estilo bonito que usamos en otros tabs
+      });
+      yield alert.present();
+    });
+  }
 };
 _Tab5Page.\u0275fac = function Tab5Page_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _Tab5Page)(\u0275\u0275directiveInject(DataService));
+  return new (__ngFactoryType__ || _Tab5Page)(\u0275\u0275directiveInject(DataService), \u0275\u0275directiveInject(AlertController));
 };
 _Tab5Page.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _Tab5Page, selectors: [["app-tab5"]], decls: 22, vars: 6, consts: [[1, "ion-no-border", 3, "translucent"], [1, "header-title"], [1, "bg-light", "ion-padding", 3, "fullscreen"], [1, "add-card"], ["lines", "none", 1, "custom-input"], ["slot", "start", "name", "medkit-outline", "color", "primary"], ["placeholder", "Nombre (ej. Aspirina)", 3, "ngModelChange", "ngModel"], ["slot", "start", "name", "apps-outline", "color", "primary"], ["type", "number", "placeholder", "Cantidad Total (ej. 30)", 3, "ngModelChange", "ngModel"], ["expand", "block", 1, "btn-add", 3, "click"], ["slot", "start", "name", "add"], [1, "section-label"], [1, "inventory-list"], ["class", "med-card", 4, "ngFor", "ngForOf"], ["class", "empty-state", 4, "ngIf"], [1, "med-card"], [1, "med-info"], [1, "top-row"], [1, "badge"], [1, "custom-progress", 3, "value", "color"], [1, "stats"], [1, "med-action"], ["fill", "clear", 3, "click", "disabled"], [1, "btn-column"], ["name", "remove-circle-outline", 2, "font-size", "28px"], [2, "font-size", "10px"], [1, "empty-state"]], template: function Tab5Page_Template(rf, ctx) {
   if (rf & 1) {
@@ -222,7 +243,7 @@ var Tab5Page = _Tab5Page;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Tab5Page, [{
     type: Component,
     args: [{ selector: "app-tab5", standalone: true, imports: [IonicModule, CommonModule, FormsModule], template: '<ion-header [translucent]="true" class="ion-no-border">\r\n  <ion-toolbar>\r\n    <ion-title class="header-title">Mi Botiqu\xEDn</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]="true" class="bg-light ion-padding">\r\n\r\n  <!-- SECCI\xD3N: AGREGAR NUEVO MEDICAMENTO -->\r\n  <div class="add-card">\r\n    <h3>Nuevo Medicamento</h3>\r\n    \r\n    <ion-item lines="none" class="custom-input">\r\n      <ion-icon slot="start" name="medkit-outline" color="primary"></ion-icon>\r\n      <ion-input [(ngModel)]="nuevoNombre" placeholder="Nombre (ej. Aspirina)"></ion-input>\r\n    </ion-item>\r\n\r\n    <ion-item lines="none" class="custom-input">\r\n      <ion-icon slot="start" name="apps-outline" color="primary"></ion-icon>\r\n      <ion-input type="number" [(ngModel)]="nuevaCantidad" placeholder="Cantidad Total (ej. 30)"></ion-input>\r\n    </ion-item>\r\n\r\n    <ion-button expand="block" class="btn-add" (click)="agregarMedicamento()">\r\n      <ion-icon slot="start" name="add"></ion-icon>\r\n      Guardar en Inventario\r\n    </ion-button>\r\n  </div>\r\n\r\n  <h3 class="section-label">Medicamentos Disponibles</h3>\r\n\r\n  <!-- LISTA DE INVENTARIO -->\r\n  <div class="inventory-list">\r\n    \r\n    <div class="med-card" *ngFor="let med of medicamentos">\r\n      \r\n      <div class="med-info">\r\n        <div class="top-row">\r\n          <h2>{{ med.nombre }}</h2>\r\n          <!-- Badge que avisa si queda poco -->\r\n          <span class="badge" [class.low-stock]="med.cantidadActual <= 3">\r\n            {{ med.cantidadActual }} restantes\r\n          </span>\r\n        </div>\r\n\r\n        <!-- Barra de Progreso Visual -->\r\n        <ion-progress-bar \r\n          [value]="med.progreso" \r\n          [color]="getColorBarra(med.progreso)"\r\n          class="custom-progress">\r\n        </ion-progress-bar>\r\n        \r\n        <p class="stats">De {{ med.cantidadInicial }} unidades iniciales</p>\r\n      </div>\r\n\r\n      <!-- Bot\xF3n para registrar toma MANUALMENTE desde el inventario -->\r\n      <div class="med-action">\r\n        <ion-button fill="clear" (click)="tomarDosisManual(med)" [disabled]="med.cantidadActual === 0">\r\n          <div class="btn-column">\r\n            <ion-icon name="remove-circle-outline" style="font-size: 28px;"></ion-icon>\r\n            <span style="font-size: 10px;">Restar 1</span>\r\n          </div>\r\n        </ion-button>\r\n      </div>\r\n\r\n    </div>\r\n\r\n    <!-- Mensaje vac\xEDo -->\r\n    <div *ngIf="medicamentos.length === 0" class="empty-state">\r\n      <p>Tu botiqu\xEDn est\xE1 vac\xEDo.</p>\r\n    </div>\r\n\r\n  </div>\r\n\r\n</ion-content>', styles: ["/* src/app/tab5/tab5.page.scss */\nion-content {\n  --background: #f8f9fa;\n}\n.header-title {\n  font-weight: 700;\n  color: #333;\n}\n.add-card {\n  background: white;\n  padding: 20px;\n  border-radius: 20px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);\n  margin-bottom: 25px;\n}\n.add-card h3 {\n  margin-top: 0;\n  font-size: 16px;\n  font-weight: 700;\n  color: #444;\n  margin-bottom: 15px;\n}\n.custom-input {\n  --background: #f0f4f8;\n  border-radius: 12px;\n  margin-bottom: 10px;\n  --padding-start: 10px;\n}\n.btn-add {\n  margin-top: 15px;\n  --border-radius: 12px;\n  --box-shadow: none;\n  font-weight: 600;\n}\n.section-label {\n  font-size: 18px;\n  font-weight: 700;\n  color: #333;\n  margin-left: 5px;\n  margin-bottom: 15px;\n}\n.med-card {\n  background: white;\n  border-radius: 16px;\n  padding: 15px 15px 15px 20px;\n  margin-bottom: 15px;\n  display: flex;\n  align-items: center;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);\n}\n.med-card .med-info {\n  flex: 1;\n}\n.med-card .med-info .top-row {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 8px;\n}\n.med-card .med-info .top-row h2 {\n  margin: 0;\n  font-size: 17px;\n  font-weight: 700;\n  color: #222;\n}\n.med-card .med-info .top-row .badge {\n  font-size: 12px;\n  background: #e3edfb;\n  color: #3880ff;\n  padding: 4px 10px;\n  border-radius: 10px;\n  font-weight: 600;\n}\n.med-card .med-info .top-row .badge.low-stock {\n  background: #ffebee;\n  color: #ef5350;\n}\n.med-card .med-info .custom-progress {\n  height: 8px;\n  border-radius: 4px;\n  margin-bottom: 5px;\n}\n.med-card .med-info .stats {\n  margin: 0;\n  font-size: 11px;\n  color: #999;\n}\n.med-card .med-action {\n  margin-left: 10px;\n  border-left: 1px solid #eee;\n  padding-left: 5px;\n}\n.med-card .med-action .btn-column {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  color: #3880ff;\n}\n.empty-state {\n  text-align: center;\n  color: #aaa;\n  margin-top: 40px;\n}\n/*# sourceMappingURL=tab5.page.css.map */\n"] }]
-  }], () => [{ type: DataService }], null);
+  }], () => [{ type: DataService }, { type: AlertController }], null);
 })();
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Tab5Page, { className: "Tab5Page", filePath: "src/app/tab5/tab5.page.ts", lineNumber: 14 });
@@ -230,4 +251,4 @@ var Tab5Page = _Tab5Page;
 export {
   Tab5Page
 };
-//# sourceMappingURL=tab5.page-X4TZ6UYR.js.map
+//# sourceMappingURL=tab5.page-TOI22N5W.js.map

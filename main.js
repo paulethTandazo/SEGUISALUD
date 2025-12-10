@@ -53,7 +53,7 @@ var routes = [
   },
   {
     path: "tabs",
-    loadChildren: () => import("./tabs.routes-RZ2DDJIK.js").then((m) => m.routes)
+    loadChildren: () => import("./tabs.routes-7DGVOIVZ.js").then((m) => m.routes)
   }
 ];
 

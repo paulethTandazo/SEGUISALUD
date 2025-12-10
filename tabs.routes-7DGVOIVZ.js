@@ -159,7 +159,7 @@ var routes = [
       },
       {
         path: "tab5",
-        loadComponent: () => import("./tab5.page-X4TZ6UYR.js").then((m) => m.Tab5Page)
+        loadComponent: () => import("./tab5.page-TOI22N5W.js").then((m) => m.Tab5Page)
       },
       {
         path: "tab6",
@@ -181,4 +181,4 @@ var routes = [
 export {
   routes
 };
-//# sourceMappingURL=tabs.routes-RZ2DDJIK.js.map
+//# sourceMappingURL=tabs.routes-7DGVOIVZ.js.map
