@@ -1,18 +1,22 @@
 <ion-header [translucent]="true" class="ion-no-border">
-  </ion-header>
+  <ion-toolbar>
+    <div class="header-container">
+      <div class="text-content">
+        <p class="greeting">Hola de nuevo,</p>
+        <h1 class="user-name">Roberto</h1>
+      </div>
+      
+      <!-- NUEVO: BADGE DE RACHA -->
+      <div class="streak-badge">
+        <ion-icon name="flame" color="warning"></ion-icon>
+        <span>{{ rachaActual }}</span>
+      </div>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content [fullscreen]="true" class="bg-light ion-padding">
-  
-  <div class="header-container">
-    <div class="text-content">
-      <p class="greeting">Hola de nuevo,</p>
-      <h1 class="user-name">Roberto</h1>
-    </div>
-    <ion-button fill="clear" class="notif-btn">
-      <ion-icon name="notifications-outline"></ion-icon>
-      <div class="badge-dot" *ngIf="cantidadPendientes > 0"></div>
-    </ion-button>
-  </div>
 
   <div class="status-card animate-up">
     <div class="status-content">
@@ -39,7 +43,7 @@
   <ion-grid class="ion-no-padding">
     <ion-row>
       
-      <ion-col size="12">
+      <ion-col size="6">
         <div class="action-card animate-up delay-1" (click)="irA('/tabs/tab2')">
           <div class="icon-box blue">
             <ion-icon name="calendar-number-outline"></ion-icon>
@@ -49,7 +53,7 @@
         </div>
       </ion-col>
 
-      <ion-col size="12">
+      <ion-col size="6">
         <div class="action-card animate-up delay-2" (click)="irA('/tabs/tab4')">
           <div class="icon-box green">
             <ion-icon name="map-outline"></ion-icon>
@@ -59,7 +63,7 @@
         </div>
       </ion-col>
 
-      <ion-col size="12">
+      <ion-col size="6">
         <div class="action-card animate-up delay-3" (click)="irA('/tabs/tab5')">
           <div class="icon-box orange">
             <ion-icon name="medkit-outline"></ion-icon>
@@ -69,7 +73,7 @@
         </div>
       </ion-col>
 
-      <ion-col size="12">
+      <ion-col size="6">
         <div class="action-card animate-up delay-4" (click)="irA('/tabs/tab6')">
           <div class="icon-box red">
             <ion-icon name="heart-circle-outline"></ion-icon>

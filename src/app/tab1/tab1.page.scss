@@ -3,7 +3,6 @@ ion-content {
   --background: #f8f9fa;
 }
 
-// Cabecera Personalizada
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -24,24 +23,33 @@ ion-content {
     letter-spacing: -0.5px;
   }
 
-  .notif-btn {
-    position: relative;
-    color: #333;
-    
-    .badge-dot {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      width: 8px;
-      height: 8px;
-      background: #eb445a;
-      border-radius: 50%;
-      border: 1px solid white;
+  // --- ESTILO NUEVO PARA LA RACHA ---
+  .streak-badge {
+    background: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+
+    ion-icon {
+      font-size: 20px;
+      // Animación simple de latido para el fuego
+      animation: pulse 2s infinite; 
+    }
+
+    span {
+      font-weight: 800;
+      color: #333;
+      font-size: 16px;
     }
   }
 }
 
-// Tarjeta de Estado (Banner Azul)
+// ... (Resto de tus estilos action-card, status-card, etc. se mantienen igual) ...
+
 .status-card {
   background: linear-gradient(135deg, #3880ff 0%, #3dc2ff 100%);
   border-radius: 20px;
@@ -83,7 +91,6 @@ ion-content {
   padding-left: 5px;
 }
 
-// Tarjetas de Acción (Botones Cuadrados)
 .action-card {
   background: white;
   border-radius: 20px;
@@ -97,10 +104,9 @@ ion-content {
   transition: transform 0.2s;
 
   &:active {
-    transform: scale(0.96); // Efecto de click
+    transform: scale(0.96);
   }
 
-  // Caja del Icono con colores
   .icon-box {
     width: 55px;
     height: 55px;
@@ -127,11 +133,10 @@ ion-content {
 
   .card-desc {
     font-size: 11px;
-    color: #1a0101;
+    color: #999;
   }
 }
 
-// Animaciones de entrada
 .animate-up {
   animation: slideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
@@ -142,12 +147,12 @@ ion-content {
 .delay-4 { animation-delay: 0.4s; }
 
 @keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }

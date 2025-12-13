@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core'; // Agregamos OnInit
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { DataService } from '../services/data'; // <--- IMPORTAR SERVICIO
-import { calendarNumberOutline, mapOutline, medkitOutline, heartCircleOutline, notificationsOutline } from 'ionicons/icons';
+import { DataService } from '../services/data'; 
+import { 
+  calendarNumberOutline, mapOutline, medkitOutline, 
+  heartCircleOutline, notificationsOutline, flame // Importar FLAME
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-tab1',
@@ -15,20 +18,27 @@ import { calendarNumberOutline, mapOutline, medkitOutline, heartCircleOutline, n
 })
 export class Tab1Page implements OnInit {
 
-  cantidadPendientes: number = 0; // Variable para mostrar en el HTML
+  cantidadPendientes: number = 0;
+  rachaActual: number = 0; // Nueva variable
 
   constructor(
     private router: Router,
-    private dataService: DataService // Inyectamos el servicio
+    private dataService: DataService 
   ) {
-    addIcons({ calendarNumberOutline, mapOutline, medkitOutline, heartCircleOutline, notificationsOutline });
+    addIcons({ 
+      calendarNumberOutline, mapOutline, medkitOutline, 
+      heartCircleOutline, notificationsOutline, flame // Registrar FLAME
+    });
   }
 
   ngOnInit() {
-    // Nos suscribimos a los cambios. 
-    // Cada vez que Tab 2 agregue algo, esto se ejecuta automáticamente.
     this.dataService.recordatorios$.subscribe(lista => {
       this.cantidadPendientes = lista.length;
+    });
+
+    // Suscribirse a la Racha
+    this.dataService.racha$.subscribe(valor => {
+      this.rachaActual = valor;
     });
   }
 
