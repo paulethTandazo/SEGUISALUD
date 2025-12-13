@@ -6,7 +6,7 @@ import {
 import {
   addIcons,
   notificationsOutline
-} from "./chunk-QMCNGXYK.js";
+} from "./chunk-BAK4QGVB.js";
 import {
   Component,
   IonicRouteStrategy,
@@ -49,11 +49,11 @@ var routes = [
   },
   {
     path: "login",
-    loadComponent: () => import("./login.page-LWVABHMZ.js").then((m) => m.LoginPage)
+    loadComponent: () => import("./login.page-YKPM6TDZ.js").then((m) => m.LoginPage)
   },
   {
     path: "tabs",
-    loadChildren: () => import("./tabs.routes-7DGVOIVZ.js").then((m) => m.routes)
+    loadChildren: () => import("./tabs.routes-65QAARN3.js").then((m) => m.routes)
   }
 ];
 

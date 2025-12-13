@@ -32,7 +32,7 @@ import {
   logoApple,
   logoGoogle,
   mailOutline
-} from "./chunk-QMCNGXYK.js";
+} from "./chunk-BAK4QGVB.js";
 import {
   CommonModule,
   Component,
@@ -142,4 +142,4 @@ var LoginPage = _LoginPage;
 export {
   LoginPage
 };
-//# sourceMappingURL=login.page-LWVABHMZ.js.map
+//# sourceMappingURL=login.page-YKPM6TDZ.js.map

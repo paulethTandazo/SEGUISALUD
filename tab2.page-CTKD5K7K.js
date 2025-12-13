@@ -1,6 +1,6 @@
 import {
   DataService
-} from "./chunk-TMJ67NVR.js";
+} from "./chunk-PWHMQS6T.js";
 import {
   AlertController,
   IonBadge,
@@ -53,7 +53,7 @@ import {
   notificationsOutline,
   timeOutline,
   trashOutline
-} from "./chunk-QMCNGXYK.js";
+} from "./chunk-BAK4QGVB.js";
 import {
   CommonModule,
   Component,
@@ -207,6 +207,7 @@ var _Tab2Page = class _Tab2Page {
     this.miCorreo = "usuario@seguisalud.com";
     addIcons({ checkmarkCircleOutline, trashOutline, notificationsOutline, alarmOutline, createOutline, colorPaletteOutline, timeOutline, medkitOutline });
   }
+  // --- INICIALIZACIÓN ---
   ngOnInit() {
     return __async(this, null, function* () {
       this.dataService.recordatorios$.subscribe((datos) => {
@@ -221,6 +222,7 @@ var _Tab2Page = class _Tab2Page {
           id: "alarmas_salud",
           name: "Alarmas de Medicaci\xF3n",
           importance: 5,
+          // Máxima prioridad (sonido + vibración)
           sound: "res://platform_default",
           visibility: 1,
           vibration: true
@@ -233,15 +235,19 @@ var _Tab2Page = class _Tab2Page {
       }
     });
   }
+  // Limpieza al salir de la página
   ngOnDestroy() {
     if (this.intervaloWeb)
       clearInterval(this.intervaloWeb);
   }
+  // --- UTILIDADES ---
+  // Obtiene la hora exacta de tu zona horaria (evita problemas de UTC)
   getFechaLocalISO() {
     const now = /* @__PURE__ */ new Date();
     const tzOffset = now.getTimezoneOffset() * 6e4;
     return new Date(now.getTime() - tzOffset).toISOString().slice(0, -1);
   }
+  // Cambia el color de fondo de la tarjeta cíclicamente
   cambiarColor() {
     this.indiceColor++;
     if (this.indiceColor >= this.coloresFlashcard.length) {
@@ -249,14 +255,17 @@ var _Tab2Page = class _Tab2Page {
     }
     this.colorActual = this.coloresFlashcard[this.indiceColor];
   }
+  // Autocompleta el texto cuando eliges una medicina del menú
   alSeleccionarMedicamento() {
     if (this.medicamentoVinculado) {
       this.nuevoRecordatorio = `Tomar dosis de ${this.medicamentoVinculado}`;
     }
   }
+  // Actualiza la variable cuando el usuario mueve el calendario
   cambioFecha(event) {
     this.fechaSeleccionada = event.detail.value;
   }
+  // --- CREACIÓN DE RECORDATORIO ---
   agregarRecordatorio() {
     return __async(this, null, function* () {
       if (this.nuevoRecordatorio.trim().length < 1) {
@@ -265,11 +274,15 @@ var _Tab2Page = class _Tab2Page {
       const fechaDate = new Date(this.fechaSeleccionada);
       const tarea = {
         id: (/* @__PURE__ */ new Date()).getTime(),
+        // ID único basado en milisegundos
         texto: this.nuevoRecordatorio,
         fecha: this.fechaSeleccionada,
         color: this.colorActual,
+        // Guardamos el color elegido
         medicina: this.medicamentoVinculado,
+        // Guardamos qué medicina es (para descontar luego)
         yaSono: false
+        // Bandera para que no suene repetido
       };
       this.dataService.agregarRecordatorio(tarea);
       if (this.platform.is("hybrid")) {
@@ -280,6 +293,8 @@ var _Tab2Page = class _Tab2Page {
       this.medicamentoVinculado = "";
     });
   }
+  // --- COMPLETAR / ELIMINAR TAREA ---
+  // Esta función se llama al dar clic en el Check verde o en "Ya me la tomé"
   completarTarea(item) {
     return __async(this, null, function* () {
       this.audio.pause();
@@ -288,6 +303,7 @@ var _Tab2Page = class _Tab2Page {
       if (item.medicina) {
         this.dataService.descontarDosis(item.medicina);
       }
+      this.dataService.incrementarRacha();
       let mensaje = "\u2705 Dosis completada.";
       if (item.medicina) {
         mensaje += ` Inventario de ${item.medicina} actualizado.`;
@@ -301,6 +317,7 @@ var _Tab2Page = class _Tab2Page {
       toast.present();
     });
   }
+  // --- LÓGICA NATIVA (ANDROID) ---
   programarNotificacionNativa(item, fecha) {
     return __async(this, null, function* () {
       yield LocalNotifications.schedule({
@@ -309,12 +326,15 @@ var _Tab2Page = class _Tab2Page {
           body: item.texto,
           id: item.id,
           schedule: { at: fecha },
+          // Fecha exacta programada
           channelId: "alarmas_salud",
+          // Usar el canal ruidoso que creamos
           sound: "res://platform_default"
         }]
       });
     });
   }
+  // --- LÓGICA WEB (NAVEGADOR) ---
   iniciarRelojWeb() {
     this.intervaloWeb = setInterval(() => {
       this.verificarAlarmas();
@@ -325,27 +345,31 @@ var _Tab2Page = class _Tab2Page {
     this.listaRecordatorios.forEach((item) => {
       const fechaRecordatorio = new Date(item.fecha);
       if (!item.yaSono && this.esMismoMinuto(ahora, fechaRecordatorio)) {
+        console.log("\xA1ALARMA!", item.texto);
         item.yaSono = true;
         this.activarAlarmaWeb(item);
       }
     });
   }
+  // Comparador de fechas preciso hasta el minuto
   esMismoMinuto(d1, d2) {
     return d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate() && d1.getHours() === d2.getHours() && d1.getMinutes() === d2.getMinutes();
   }
+  // Disparar la alarma visual y sonora en el navegador
   activarAlarmaWeb(item) {
     return __async(this, null, function* () {
       try {
         this.audio.loop = true;
         yield this.audio.play();
       } catch (e) {
-        console.log("Audio bloqueado");
+        console.log("Navegador bloque\xF3 audio autom\xE1tico. Toca la pantalla.");
       }
       const alert = yield this.alertCtrl.create({
         header: "\xA1ALARMA!",
         subHeader: "Hora de tu medicamento",
         message: item.texto,
         backdropDismiss: false,
+        // Obliga a interactuar
         buttons: [{
           text: "\u2705 Ya me la tom\xE9 (Apagar)",
           handler: () => {
@@ -357,6 +381,7 @@ var _Tab2Page = class _Tab2Page {
       yield alert.present();
     });
   }
+  // Mensaje simple al guardar
   mostrarAlertaConfirmacion(titulo, fechaIso) {
     return __async(this, null, function* () {
       const fechaLegible = new Date(fechaIso).toLocaleString();
@@ -574,9 +599,9 @@ var Tab2Page = _Tab2Page;
   }], () => [{ type: AlertController }, { type: ToastController }, { type: DataService }, { type: Platform }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Tab2Page, { className: "Tab2Page", filePath: "src/app/tab2/tab2.page.ts", lineNumber: 17 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Tab2Page, { className: "Tab2Page", filePath: "src/app/tab2/tab2.page.ts", lineNumber: 21 });
 })();
 export {
   Tab2Page
 };
-//# sourceMappingURL=tab2.page-ADQKCOIW.js.map
+//# sourceMappingURL=tab2.page-CTKD5K7K.js.map

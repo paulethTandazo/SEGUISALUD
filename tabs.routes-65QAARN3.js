@@ -28,7 +28,7 @@ import {
   star,
   starOutline,
   waterOutline
-} from "./chunk-QMCNGXYK.js";
+} from "./chunk-BAK4QGVB.js";
 import {
   Component,
   EnvironmentInjector,
@@ -143,15 +143,15 @@ var routes = [
     children: [
       {
         path: "tab1",
-        loadComponent: () => import("./tab1.page-62KATR3J.js").then((m) => m.Tab1Page)
+        loadComponent: () => import("./tab1.page-EOHAOK3I.js").then((m) => m.Tab1Page)
       },
       {
         path: "tab2",
-        loadComponent: () => import("./tab2.page-ADQKCOIW.js").then((m) => m.Tab2Page)
+        loadComponent: () => import("./tab2.page-CTKD5K7K.js").then((m) => m.Tab2Page)
       },
       {
         path: "tab3",
-        loadComponent: () => import("./tab3.page-E4GHH4GT.js").then((m) => m.Tab3Page)
+        loadComponent: () => import("./tab3.page-YGQR2F4B.js").then((m) => m.Tab3Page)
       },
       {
         path: "tab4",
@@ -159,11 +159,11 @@ var routes = [
       },
       {
         path: "tab5",
-        loadComponent: () => import("./tab5.page-TOI22N5W.js").then((m) => m.Tab5Page)
+        loadComponent: () => import("./tab5.page-ULFHGVNB.js").then((m) => m.Tab5Page)
       },
       {
         path: "tab6",
-        loadComponent: () => import("./tab6.page-RVB4UPSP.js").then((m) => m.Tab6Page)
+        loadComponent: () => import("./tab6.page-PFWCUQLK.js").then((m) => m.Tab6Page)
       },
       {
         path: "",
@@ -181,4 +181,4 @@ var routes = [
 export {
   routes
 };
-//# sourceMappingURL=tabs.routes-7DGVOIVZ.js.map
+//# sourceMappingURL=tabs.routes-65QAARN3.js.map
